@@ -1,0 +1,13 @@
+{
+  "domain": "candy_simplyfi",
+  "name": "Candy simply-Fi (local)",
+  "version": "0.1.0",
+  "integration_type": "device",
+  "config_flow": true,
+  "iot_class": "local_polling",
+  "documentation": "https://github.com/SirLouen/ha-candy-simplyfi",
+  "issue_tracker": "https://github.com/SirLouen/ha-candy-simplyfi/issues",
+  "codeowners": ["@SirLouen"],
+  "requirements": [],
+  "loggers": ["custom_components.candy_simplyfi"]
+}

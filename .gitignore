@@ -1,0 +1,4 @@
+custom_components/**/__pycache__/
+__pycache__/
+*.pyc
+*.tar.gz

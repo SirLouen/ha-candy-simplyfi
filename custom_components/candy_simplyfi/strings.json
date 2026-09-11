@@ -1,0 +1,28 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Candy simply-Fi washer",
+        "description": "Enter the washer's local IP address (e.g. {example}). The encryption key is recovered automatically from the machine.",
+        "data": {
+          "host": "IP address or hostname"
+        }
+      },
+      "reconfigure": {
+        "title": "Change washer address",
+        "description": "Enter the washer's new local IP address. The encryption key is re-recovered from the machine.",
+        "data": {
+          "host": "IP address or hostname"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Could not reach the washer at that address (it does not answer ping; make sure it is powered and on your network).",
+      "cannot_decrypt": "Reached the device but could not decrypt its status — it may not be a Candy simply-Fi module."
+    },
+    "abort": {
+      "already_configured": "This washer is already configured.",
+      "reconfigure_successful": "Washer address updated."
+    }
+  }
+}

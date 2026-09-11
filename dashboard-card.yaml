@@ -1,0 +1,78 @@
+# Candy Washer — home-panel card (core cards only, no custom components).
+# Paste into a dashboard (Edit dashboard → ⋮ → Raw configuration editor, or "Add card → Manual").
+# Entity IDs assume the device is named "Candy Washer"; adjust the suffixes if you renamed it.
+type: vertical-stack
+cards:
+  - type: entities
+    title: Candy Washer — status
+    show_header_toggle: false
+    entities:
+      - entity: sensor.candy_washer_state
+        name: State
+      - entity: sensor.candy_washer_program
+        name: Program
+      - entity: sensor.candy_washer_phase
+        name: Phase
+      - entity: sensor.candy_washer_remaining
+        name: Remaining
+      - entity: sensor.candy_washer_target_temperature
+        name: Temperature
+      - entity: sensor.candy_washer_spin_speed
+        name: Spin
+      - entity: binary_sensor.candy_washer_running
+        name: Running
+      - entity: binary_sensor.candy_washer_problem
+        name: Problem
+
+  - type: entities
+    title: Wash setup (press Start to apply)
+    show_header_toggle: false
+    entities:
+      - entity: select.candy_washer_program
+      - entity: select.candy_washer_target_temperature
+      - entity: select.candy_washer_spin_speed
+      - entity: select.candy_washer_soil_level
+      - entity: select.candy_washer_extra_rinses
+      - entity: switch.candy_washer_steam
+      - entity: switch.candy_washer_pre_wash
+      - entity: switch.candy_washer_hygiene
+      - entity: switch.candy_washer_good_night
+      - entity: switch.candy_washer_aquaplus
+      - entity: number.candy_washer_delay_start
+
+  - type: horizontal-stack
+    cards:
+      - type: button
+        name: Start
+        icon: mdi:play
+        entity: button.candy_washer_start
+        tap_action:
+          action: perform-action
+          perform_action: button.press
+          target:
+            entity_id: button.candy_washer_start
+      - type: button
+        name: Stop
+        icon: mdi:stop
+        entity: button.candy_washer_stop
+        tap_action:
+          action: perform-action
+          perform_action: button.press
+          target:
+            entity_id: button.candy_washer_stop
+      - type: button
+        name: Pause
+        icon: mdi:pause
+        entity: button.candy_washer_pause
+        tap_action:
+          action: perform-action
+          perform_action: button.press
+          target:
+            entity_id: button.candy_washer_pause
+
+  - type: entities
+    title: Learn a themed program (advanced)
+    show_header_toggle: false
+    entities:
+      - entity: text.candy_washer_learn_as
+      - entity: button.candy_washer_learn_current_program
