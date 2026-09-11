@@ -14,11 +14,10 @@ class CandyConfigFlow(ConfigFlow, domain=DOMAIN):
     VERSION = 1
 
     async def _validate(self, host: str) -> tuple[str | None, str | None]:
-        """Return (key, error). Recover the key and confirm we can decrypt a real status."""
-        client = CandyWasher(host)
+        """Return (key, error). One gentle read: recover the key and confirm it decrypts a status."""
+        client = CandyWasher(host, retries=6, retry_delay=1.0)
         try:
-            key = await self.hass.async_add_executor_job(client.ensure_key)
-            await self.hass.async_add_executor_job(client.status)
+            key = await self.hass.async_add_executor_job(client.probe)
         except CandyWasherError:
             return None, "cannot_connect"
         except Exception:  # noqa: BLE001  (bad key -> decode/JSON failure)

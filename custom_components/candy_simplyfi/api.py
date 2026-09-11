@@ -137,6 +137,15 @@ class CandyWasher:
         doc = json.loads(xor_decrypt(self._get(READ_PATH), self.key))
         return doc.get(STATUS_ROOT, doc)
 
+    def probe(self) -> str:
+        """Single-read connectivity + key check for the config flow (one HTTP hit, gentle on the
+        single-connection module). Returns the recovered key; raises on unreachable/undecryptable."""
+        body = self._get(READ_PATH)
+        key = recover_key(body)
+        json.loads(xor_decrypt(body, key))  # confirm the key decrypts to valid status JSON
+        self.key = key
+        return key
+
     def _write(self, param_string: str) -> str:
         self.ensure_key()
         data = xor_encrypt(param_string, self.key)
