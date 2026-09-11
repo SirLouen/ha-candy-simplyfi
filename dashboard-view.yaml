@@ -1,0 +1,101 @@
+# Candy Washer — a standalone DASHBOARD VIEW (its own tab), Sections layout, core cards only.
+# Add it as a new view: dashboard → Edit → + (add view) → ⋮ → Edit in YAML → paste this;
+# or drop it into your dashboard's `views:` list in the Raw configuration editor.
+# Entity IDs assume the device is named "Candy Washer" (check Developer tools → States: candy_washer).
+title: Washing Machine
+path: washing-machine
+icon: mdi:washing-machine
+type: sections
+max_columns: 2
+badges: []
+sections:
+  - type: grid
+    cards:
+      - type: heading
+        heading: Status
+      - type: tile
+        entity: sensor.candy_washer_state
+        name: State
+      - type: tile
+        entity: binary_sensor.candy_washer_running
+        name: Running
+        color: blue
+      - type: tile
+        entity: sensor.candy_washer_program
+        name: Program
+      - type: tile
+        entity: sensor.candy_washer_phase
+        name: Phase
+      - type: tile
+        entity: sensor.candy_washer_remaining
+        name: Remaining
+      - type: tile
+        entity: sensor.candy_washer_target_temperature
+        name: Temperature
+      - type: tile
+        entity: sensor.candy_washer_spin_speed
+        name: Spin
+      - type: tile
+        entity: binary_sensor.candy_washer_problem
+        name: Problem
+        color: red
+  - type: grid
+    cards:
+      - type: heading
+        heading: Wash setup — press Start to apply
+      - type: entities
+        grid_options:
+          columns: full
+        entities:
+          - select.candy_washer_program
+          - select.candy_washer_target_temperature
+          - select.candy_washer_spin_speed
+          - select.candy_washer_soil_level
+          - select.candy_washer_extra_rinses
+          - switch.candy_washer_steam
+          - switch.candy_washer_pre_wash
+          - switch.candy_washer_hygiene
+          - switch.candy_washer_good_night
+          - switch.candy_washer_aquaplus
+          - number.candy_washer_delay_start
+  - type: grid
+    cards:
+      - type: heading
+        heading: Actions
+      - type: button
+        name: Start
+        icon: mdi:play
+        entity: button.candy_washer_start
+        tap_action:
+          action: perform-action
+          perform_action: button.press
+          target:
+            entity_id: button.candy_washer_start
+      - type: button
+        name: Stop
+        icon: mdi:stop
+        entity: button.candy_washer_stop
+        tap_action:
+          action: perform-action
+          perform_action: button.press
+          target:
+            entity_id: button.candy_washer_stop
+      - type: button
+        name: Pause
+        icon: mdi:pause
+        entity: button.candy_washer_pause
+        tap_action:
+          action: perform-action
+          perform_action: button.press
+          target:
+            entity_id: button.candy_washer_pause
+  - type: grid
+    cards:
+      - type: heading
+        heading: Learn a themed program (advanced)
+      - type: entities
+        grid_options:
+          columns: full
+        entities:
+          - text.candy_washer_learn_as
+          - button.candy_washer_learn_current_program
